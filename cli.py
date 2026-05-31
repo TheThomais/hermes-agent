@@ -3173,6 +3173,8 @@ class HermesCLI:
         # Merge new ``fallback_providers`` entries with any legacy
         # ``fallback_model`` entries so old configs still participate.
         self._fallback_model = get_fallback_chain(CLI_CONFIG)
+        if str(os.getenv("HERMES_DISABLE_FALLBACK", "")).strip().lower() in {"1", "true", "yes", "on"}:
+            self._fallback_model = []
 
         # Signature of the currently-initialised agent's runtime.  Used to
         # rebuild the agent when provider / model / base_url changes across
